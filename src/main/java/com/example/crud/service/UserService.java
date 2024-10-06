@@ -3,6 +3,8 @@ package com.example.crud.service;
 import com.example.crud.dto.request.UserCreationRequest;
 import com.example.crud.dto.request.UserUpdateRequest;
 import com.example.crud.entity.User;
+import com.example.crud.exception.AppException;
+import com.example.crud.exception.ErrorCode;
 import com.example.crud.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class UserService {
         User user = new User();
 
         if (userRepository.existsByUsername(request.getUsername()))
-                throw new RuntimeException("Username already exists");
+                throw new AppException(ErrorCode.USER_EXISTED);
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
         user.setFirstName(request.getFirstName());
