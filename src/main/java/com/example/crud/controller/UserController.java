@@ -3,9 +3,13 @@ package com.example.crud.controller;
 import com.example.crud.dto.request.UserCreationRequest;
 import com.example.crud.dto.request.UserUpdateRequest;
 import com.example.crud.dto.response.ApiResponse;
+import com.example.crud.dto.response.UserResponse;
 import com.example.crud.entity.User;
 import com.example.crud.service.UserService;
 import jakarta.validation.Valid;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +17,10 @@ import java.nio.file.Path;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
-    @Autowired
-    private UserService userService;
+    UserService userService;
 
     @PostMapping("/users")
     public ApiResponse<User> createUser(@RequestBody @Valid UserCreationRequest request) {
@@ -30,12 +35,12 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public User getUser(@PathVariable String userId) {
+    public UserResponse getUser(@PathVariable String userId) {
         return userService.getUser(userId);
     }
 
     @PutMapping("/users/{userId}")
-    public User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
+    public UserResponse updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
         return userService.updateUser(userId, request);
     }
 
