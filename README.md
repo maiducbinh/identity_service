@@ -21,3 +21,5 @@ Mapper: map a entity class to a corresponding class (fields with the same names)
 Returning userresponse instead of user
 
 Using @RequiredArgsConstructor, @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true) instead of @Autowired
+
+Encoding password to ensure authenticity

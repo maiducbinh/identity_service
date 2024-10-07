@@ -9,7 +9,8 @@ import org.mapstruct.MappingTarget;
 
 
 //Error: @Mapper(componentModel = "spring")
-@Mapper(componentModel = "spring")
+@Mapper
+//        (componentModel = "spring")
 public interface UserMapper {
     // input a usercreationrquest and output a user
     User toUser(UserCreationRequest request);
